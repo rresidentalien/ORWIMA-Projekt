@@ -35,6 +35,10 @@ body {
     color: rgb(240, 231, 231);
 }
 
+#navigation_list button {
+    color: rgb(222, 193, 145);
+}
+
 #navigation_list,
 a {
     text-decoration: none;
