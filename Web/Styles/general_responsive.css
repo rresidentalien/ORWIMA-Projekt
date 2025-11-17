@@ -14,8 +14,8 @@ h3 {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(177, 177, 177);
-    border: 0px;
+    background: #c2c2c2;
+    background: linear-gradient(275deg, rgba(194, 194, 194, 1) 0%, rgba(209, 207, 207, 1) 100%);
     border-radius: 10px;
     padding: 0px 20px;
 }
@@ -49,7 +49,8 @@ a {
 }
 
 main {
-    background-color: rgb(177, 177, 177);
+    background: #c2c2c2;
+    background: linear-gradient(275deg, rgba(194, 194, 194, 1) 0%, rgba(209, 207, 207, 1) 100%);
     border: 0px;
     border-radius: 10px;
     padding: 20px;
