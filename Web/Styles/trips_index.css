@@ -19,14 +19,3 @@ a {
 #trips ul>li a {
     color: antiquewhite;
 }
-
-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 15px;
-}
-
-footer p {
-    margin: 0;
-}
