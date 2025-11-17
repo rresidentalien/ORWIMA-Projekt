@@ -1,0 +1,1 @@
+//JS file for trip ideas - showing the right trips by travel duration
