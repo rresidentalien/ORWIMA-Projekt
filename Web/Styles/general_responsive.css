@@ -113,7 +113,7 @@ footer p {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 705px) {
     #header {
         flex-direction: column;
     }
