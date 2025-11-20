@@ -27,13 +27,90 @@
     </div>
 
     <main>
-        <div>
+        <div id="intro">
             <h2>Trip ideas by travel duration</h2>
             <p>Trains can get you quite far, but it's hard sometimes to find good connections if you don't know the
                 various European railway companies. That's why here I'll list some ideas for travelling in your chosen
-                amount of hours, starting from Osijek.</p>
+                amount of hours, starting from Osijek. Of course, there is more than this site lists, but I tried to
+                compile some interesting travel options.</p>
+        </div>
+
+        <div id="form">
+            <h3>Choose travel duration:</h3>
+            <form>
+                <select id="hours" name="hours">
+                    <option value="one">About one hour</option>
+                    <option value="two">About two hours</option>
+                    <option value="four">About four hours</option>
+                    <option value="six">About six hours</option>
+                    <option value="eight">About eight hours</option>
+                    <option value="night">Overnight trains</option>
+                </select>
+                <button type="button" onclick="Search()">Search</button>
+            </form>
+        </div>
+
+        <div id="one">
+            <p><b>In about one hour from Osijek I can get to...</b></p>
+            <ul>
+                <li>Vinkovci</li>
+                <li>Đakovo</li>
+                <li>Slavonski Brod</li>
+            </ul>
+        </div>
+        <div id="two">
+            <p><b>In about two hours from Osijek I can get to...</b></p>
+            <ul>
+                <li>Pécs</li>
+                <li>Vukovar</li>
+                <li>Brčko</li>
+            </ul>
+        </div>
+        <div id="four">
+            <p><b>In about four hours from Osijek I can get to...</b></p>
+            <ul>
+                <li>Bjelovar</li>
+                <li><a href="Trips/budapest2025.html">Budapest</a></li>
+                <li>Kaposvár</li>
+                <li>Zagreb</li>
+            </ul>
+        </div>
+        <div id="six">
+            <p><b>In about six hours from Osijek I can get to...</b></p>
+            <ul>
+                <li><a href="Trips/vienna2024.html">Bratislava</a></li>
+                <li>Szombathely</li>
+                <li>Győr</li>
+                <li>Szeged</li>
+                <li><a href="Trips/vienna2025.html">Vienna</a></li>
+                <li>Brežice</li>
+            </ul>
+        </div>
+        <div id="eight">
+            <p><b>In about eight hours from Osijek I can get to...</b></p>
+            <ul>
+                <li>Ljubljana</li>
+                <li>Miskolc</li>
+                <li>Brno</li>
+                <li>Linz</li>
+                <li>Ostrava</li>
+            </ul>
+        </div>
+        <div id="night">
+            <p><b>If I leave Osijek in the afternoon, by morning I could be in...</b></p>
+            <ul>
+                <li>Prague</li>
+                <li>Bucharest</li>
+                <li>Split</li>
+                <li>Berlin</li>
+                <li>Zürich</li>
+                <li><a href="Trips/vienna2025.html">Kraków</a></li>
+                <li>Warsaw</li>
+            </ul>
         </div>
     </main>
+
+    <script src="../Scripts/trip_ideas.js"></script>
 
     <footer>
         <p>&copy; 2025 Trainwatchers. All rights reserved.</p>

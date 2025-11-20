@@ -1,5 +1,61 @@
-#navigation_list,
-a {
-    text-decoration: none;
-    color: black;
+#intro {
+    background-color: rgb(73, 43, 20);
+    border-radius: 9px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#intro p,
+#intro h2 {
+    color: antiquewhite;
+}
+
+#form {
+    background-color: rgb(73, 43, 20);
+    border-radius: 9px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#form h3 {
+    color: antiquewhite;
+}
+
+#form select {
+    border: none;
+    border-radius: 9px;
+    width: 200px;
+    height: 35px;
+    background-color: antiquewhite;
+}
+
+#form button {
+    border: none;
+    border-radius: 9px;
+    width: 70px;
+    height: 35px;
+    background-color: antiquewhite;
+}
+
+#one,
+#two,
+#four,
+#six,
+#eight,
+#night {
+    background-color: rgb(73, 43, 20);
+    border-radius: 9px;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: antiquewhite;
+}
+
+main a:link {
+    color: #c2c2c2;
+    text-decoration: underline;
+}
+
+main a:visited {
+    color: #c2c2c2;
+    text-decoration: underline;
 }
