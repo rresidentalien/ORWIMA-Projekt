@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Styles/about.css">
     <link rel="stylesheet" href="../Styles/general_responsive.css">
+    <script src="../Scripts/about.js"></script>
     <title>Trainwatchers | About</title>
 </head>
 
@@ -41,30 +42,26 @@
 
             <form id="contact-form">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="firstname" placeholder="Your name">
-
-                <br>
+                <input type="text" id="name" placeholder="Your name">
+                <p id="nameError"></p>
 
                 <label for="email">E-Mail address:</label>
-                <input type="text" id="email" name="email" placeholder="Your e-mail address">
-
-                <br>
+                <input type="text" id="email" placeholder="Your e-mail address">
+                <p id="emailError"></p>
 
                 <label for="topic">Topic:</label>
-                <select id="topic" name="topic">
+                <select id="topic">
                     <option value="web">Website information</option>
                     <option value="trains">Train travel information</option>
                     <option value="other">Other / Chit-chat</option>
                 </select>
 
-                <br>
+                <label for="message">Message:</label>
+                <textarea id="message" placeholder="Write something..."></textarea>
+                <p id="messageError"></p>
 
-                <label for="subject">Subject:</label>
-                <textarea id="subject" name="subject" placeholder="Write something.."></textarea>
-
-                <br>
-
-                <button type="button">Submit</button>
+                <button type="button" onclick="Submit()">Submit</button>
+                <p id="end">Thank you!</p>
             </form>
 
         </div>

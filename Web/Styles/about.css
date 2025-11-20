@@ -24,3 +24,14 @@ textarea {
     padding: 10px 15px;
     margin-top: 5px;
 }
+
+#nameError,
+#emailError,
+#messageError {
+    margin: 0px;
+    color: rgb(255, 191, 0);
+}
+
+#end {
+    display: none;
+}
