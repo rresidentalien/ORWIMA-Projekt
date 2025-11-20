@@ -36,14 +36,14 @@ h3 {
 
 #navigation_list button a {
     color: rgb(240, 231, 231);
+    text-decoration: none;
 }
 
 #navigation_list button {
     color: rgb(222, 193, 145);
 }
 
-#navigation_list,
-a {
+header a {
     text-decoration: none;
     color: black;
 }
