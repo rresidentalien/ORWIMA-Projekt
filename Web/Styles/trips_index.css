@@ -1,9 +1,4 @@
-#navigation_list,
-a {
-    text-decoration: none;
-    color: black;
-}
-
+/*samo za trips_index.html*/
 #trips ul {
     padding-left: 0px;
 }
@@ -17,5 +12,61 @@ a {
 }
 
 #trips ul>li a {
+    color: antiquewhite;
+}
+
+
+/*za podstranice*/
+#intro {
+    background-color: rgb(73, 43, 20);
+    border-radius: 9px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#intro h2,
+#intro p {
+    color: antiquewhite;
+}
+
+#path {
+    background-color: rgb(73, 43, 20);
+    border-radius: 9px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#path h3,
+#path p,
+#path li {
+    color: antiquewhite
+}
+
+#activities {
+    background-color: rgb(73, 43, 20);
+    border-radius: 9px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#activities p {
+    background-color: antiquewhite;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#activities h3,
+#activities li {
+    color: antiquewhite;
+}
+
+#gallery {
+    background-color: rgb(73, 43, 20);
+    border-radius: 9px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#gallery h3 {
     color: antiquewhite;
 }
