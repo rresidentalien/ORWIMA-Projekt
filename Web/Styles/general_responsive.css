@@ -140,4 +140,9 @@ footer p {
     footer {
         flex-direction: column;
     }
+
+    /*Pages -> Trips -> all of the trip pages -> photos grid*/
+    #photos {
+        grid-template-columns: 1fr;
+    }
 }
