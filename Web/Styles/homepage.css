@@ -3,6 +3,13 @@
     border-radius: 9px;
     padding: 10px;
     margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+#intro img {
+    height: 100px;
+    margin: auto;
 }
 
 #intro p {
