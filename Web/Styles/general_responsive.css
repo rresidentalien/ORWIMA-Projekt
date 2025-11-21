@@ -145,4 +145,9 @@ footer p {
     #photos {
         grid-template-columns: 1fr;
     }
+
+    /*Homepage - icon*/
+    #icon {
+        display: none;
+    }
 }
