@@ -65,9 +65,19 @@
     background-color: rgb(73, 43, 20);
     border-radius: 9px;
     padding: 10px;
-    margin-bottom: 20px;
 }
 
 #gallery h3 {
     color: antiquewhite;
+}
+
+#photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+#photos img {
+    border-radius: 10px;
+    width: 100%;
 }
