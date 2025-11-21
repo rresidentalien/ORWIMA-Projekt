@@ -146,7 +146,7 @@ footer p {
         grid-template-columns: 1fr;
     }
 
-    /*Homepage - icon*/
+    /*Homepage - hide icon*/
     #icon {
         display: none;
     }
