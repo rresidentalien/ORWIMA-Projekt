@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
@@ -36,6 +37,7 @@ enum class Destination(
 ) {
     HOME_SCREEN("home", Icons.Outlined.Home, "Home"),
     ADD_NEW_SCREEN("add_new", Icons.Outlined.Add, "Add New"),
+    MY_TRAINS_SCREEN("my_trains", Icons.Outlined.Star, "My Trains")
 }
 
 @Composable
@@ -53,6 +55,7 @@ fun AppNavHost(
                 when (destination) {
                     Destination.HOME_SCREEN -> HomeScreen()
                     Destination.ADD_NEW_SCREEN -> AddNew()
+                    Destination.MY_TRAINS_SCREEN -> MyTrains()
                 }
             }
         }
