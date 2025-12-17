@@ -1,6 +1,8 @@
 package hr.ferit.lucijasteler.trainwatchers.ui.theme
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Home
@@ -8,6 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,8 +19,11 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -55,15 +61,17 @@ fun AppNavHost(
 
 @Preview()
 @Composable
-fun BottomBar(modifier: Modifier = Modifier) {
+fun BottomBar() {
     val navController = rememberNavController()
     val startDestination = Destination.HOME_SCREEN
     var selectedDestination by rememberSaveable { mutableIntStateOf(startDestination.ordinal) }
 
     Scaffold(
-        modifier = modifier,
         bottomBar = {
-            NavigationBar(windowInsets = NavigationBarDefaults.windowInsets) {
+            NavigationBar(windowInsets = NavigationBarDefaults.windowInsets,
+                containerColor = DarkAntiqueWhite,
+                modifier = Modifier.clip(RoundedCornerShape(topStart = 25.dp, topEnd = 25.dp))
+            ) {
                 Destination.entries.forEachIndexed { index, destination ->
                     NavigationBarItem(
                         selected = selectedDestination == index,
@@ -71,6 +79,13 @@ fun BottomBar(modifier: Modifier = Modifier) {
                             navController.navigate(route = destination.route)
                             selectedDestination = index
                         },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = AntiqueWhite,
+                            unselectedIconColor = Brown,
+                            indicatorColor = Brown,
+                            unselectedTextColor = Brown,
+                            selectedTextColor = Brown
+                        ),
                         icon = {
                             Icon(
                                 destination.icon,
