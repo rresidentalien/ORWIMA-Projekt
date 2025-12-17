@@ -16,6 +16,39 @@
     text-decoration: none;
 }
 
+#table {
+    background-color: rgb(73, 43, 20);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+#table h2 {
+    margin-top: 10px;
+    color: antiquewhite;
+}
+
+#table p {
+    color: antiquewhite;
+}
+
+#table table {
+    width: 100%;
+    background-color: antiquewhite;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+#table th {
+    background-color: rgb(73, 43, 20);
+    color: antiquewhite;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+#table td {
+    padding: 7px;
+}
 
 /*za podstranice*/
 #intro {
