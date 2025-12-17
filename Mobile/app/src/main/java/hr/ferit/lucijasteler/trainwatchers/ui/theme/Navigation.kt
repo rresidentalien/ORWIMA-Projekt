@@ -1,6 +1,5 @@
 package hr.ferit.lucijasteler.trainwatchers.ui.theme
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
@@ -46,8 +45,8 @@ fun AppNavHost(
         Destination.entries.forEach { destination ->
             composable(destination.route) {
                 when (destination) {
-                    Destination.HOME_SCREEN -> HomeScreen(navController)
-                    Destination.ADD_NEW_SCREEN -> AddNew(navController)
+                    Destination.HOME_SCREEN -> HomeScreen()
+                    Destination.ADD_NEW_SCREEN -> AddNew()
                 }
             }
         }
