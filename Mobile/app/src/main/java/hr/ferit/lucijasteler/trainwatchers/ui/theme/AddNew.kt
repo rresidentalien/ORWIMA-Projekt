@@ -35,7 +35,7 @@ import java.text.SimpleDateFormat
 @Composable
 fun AddNew(modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(color = AntiqueWhite)
             .padding(top = 50.dp),
@@ -43,7 +43,7 @@ fun AddNew(modifier: Modifier = Modifier) {
     ){
         AddNewHeader("Add New")
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
