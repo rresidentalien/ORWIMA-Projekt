@@ -22,7 +22,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(color = Color(0xFFFAEBD7))
+            .background(color = AntiqueWhite)
     ) {
         Title("Trainwatchers")
         Subtitle("Lucija")
