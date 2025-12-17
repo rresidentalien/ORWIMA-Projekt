@@ -1,11 +1,13 @@
 package hr.ferit.lucijasteler.trainwatchers.ui.theme
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
@@ -23,8 +25,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import java.text.SimpleDateFormat
 
 @Preview
@@ -33,26 +37,62 @@ fun AddNew(modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        TextInput("Model", modifier)
-        TextInput("Operator", modifier)
-        TextInput("Country", modifier)
-        TextInput("City", modifier)
-        DatePickerButton()
+            .background(color = AntiqueWhite)
+            .padding(top = 50.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        AddNewHeader("Add New")
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            TextInput("Model")
+            TextInput("Operator")
+            TextInput("Country")
+            TextInput("City")
+            LongTextInput("Description")
+            DatePickerButton()
+        }
     }
 }
 
 @Composable
-fun TextInput(title : String, modifier: Modifier = Modifier) {
+fun AddNewHeader(title : String) {
+    Text(text = title,
+        color = Color.Black,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 30.sp)
+}
+
+@Composable
+fun TextInput(title : String) {
     var text by remember { mutableStateOf("") }
 
     OutlinedTextField(
         value = text,
         onValueChange = { text = it },
-        label = { Text(title) }
+        label = { Text(title) },
+        shape = RoundedCornerShape(8.dp),
+        modifier = Modifier.fillMaxWidth().height(60.dp),
+        singleLine = true
+    )
+}
+
+@Composable
+fun LongTextInput(title : String) {
+    var text by remember { mutableStateOf("") }
+
+    OutlinedTextField(
+        value = text,
+        onValueChange = { text = it },
+        label = { Text(title) },
+        shape = RoundedCornerShape(8.dp),
+        modifier = Modifier
+            .height(120.dp)
+            .fillMaxWidth()
     )
 }
 
@@ -64,12 +104,12 @@ fun DatePickerButton() {
     OutlinedButton(
         onClick = { showDatePicker = true },
         shape = RoundedCornerShape(8.dp),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = Brown)
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Brown),
+        modifier = Modifier.fillMaxWidth().height(60.dp)
     ) {
         if (selectedDate != null) {
             val date = java.sql.Date(selectedDate!!)
-            val formattedDate = SimpleDateFormat("MMM dd, yyyy", java.util.Locale.getDefault()).format(date)
-            Text("Selected date: $formattedDate")
+            Text("Selected date: $date")
         } else {
             Text("Select date...")
         }
@@ -78,7 +118,6 @@ fun DatePickerButton() {
         DatePicker(
             onDateSelected = {
                 selectedDate = it
-                showDatePicker = false
             },
             onDismiss = { showDatePicker = false }
         )
