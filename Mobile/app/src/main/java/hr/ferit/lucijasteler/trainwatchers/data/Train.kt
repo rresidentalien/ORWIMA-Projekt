@@ -8,7 +8,8 @@ data class Train(
     val operator : String,
     val country : String,
     val city : String,
-    val date : Date,
     val description : String,
-    @DrawableRes val images : List<Int>
+    val date : Date,
+    @DrawableRes val images : List<String>,
+    val favourite : Boolean
 )
