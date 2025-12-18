@@ -5,6 +5,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material3.ButtonDefaults
@@ -44,21 +47,19 @@ import coil.compose.AsyncImage
 @Preview
 @Composable
 fun AddNew(modifier: Modifier = Modifier) {
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
             .background(color = AntiqueWhite)
-            .padding(top = 50.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        AddNewHeader("Add New")
+            .padding(top = 50.dp, start = 16.dp, end = 16.dp, bottom = 120.dp)
+    ) {
         Column(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(16.dp),
+            modifier = Modifier
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            AddNewHeader("Add New")
             TextInput("Model")
             TextInput("Operator")
             TextInput("Country")
@@ -67,6 +68,10 @@ fun AddNew(modifier: Modifier = Modifier) {
             DatePickerButton()
             ImageUploadButton()
         }
+        SubmitButton(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+        )
     }
 }
 
@@ -196,4 +201,14 @@ fun ImageUploadButton() {
     }
 }
 
-
+@Composable
+fun SubmitButton(modifier : Modifier = Modifier) {
+    ExtendedFloatingActionButton(
+        onClick = { TODO() },
+        icon = { Icon(Icons.Outlined.Add, contentDescription = "Add") },
+        text = { Text("Submit") },
+        containerColor = Brown,
+        contentColor = AntiqueWhite,
+        modifier = modifier
+    )
+}
