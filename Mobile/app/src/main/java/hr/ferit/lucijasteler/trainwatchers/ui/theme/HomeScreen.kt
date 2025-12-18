@@ -1,5 +1,6 @@
 package hr.ferit.lucijasteler.trainwatchers.ui.theme
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,10 +13,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import hr.ferit.lucijasteler.trainwatchers.data.TrainViewModel
+import java.util.Date
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, viewModel : TrainViewModel = TrainViewModel()) {
@@ -52,19 +54,30 @@ fun Subtitle(name : String) {
 
 @Composable
 fun Counter(viewModel : TrainViewModel) {
-    Text(text = "You have entered ${viewModel.trains.count()} trains so far",
-        modifier = Modifier.padding(top = 30.dp),
-        color = Brown)
+    if (viewModel.trains.isEmpty())
+        Text(text = "No trains found. Enter some!",
+            modifier = Modifier.padding(top = 30.dp),
+            color = Brown)
+    else
+        Text(text = "You have entered ${viewModel.trains.size} trains so far",
+            modifier = Modifier.padding(top = 30.dp),
+            color = Brown)
 }
 
 @Composable
-fun TrainCard() {
+fun TrainCard(imageResource : String, model : String, city : String, date : Date) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Brown)
     ){
-
+        Text(text = model)
+        Text(text = "$city, $date")
+        Image(
+            painter = rememberAsyncImagePainter(model = imageResource),
+            contentDescription = model,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
@@ -75,8 +88,11 @@ fun TrainsList(viewModel : TrainViewModel) {
             .fillMaxSize()
             .padding(vertical = 20.dp)
     ) {
-        items(viewModel.trains.size) { 
+        items(viewModel.trains.size) {
+            TrainCard(imageResource = viewModel.trains[it].images[0],
+                model = viewModel.trains[it].model,
+                city = viewModel.trains[it].city,
+                date = viewModel.trains[it].date)
         }
-
     }
 }
