@@ -1,5 +1,8 @@
 package hr.ferit.lucijasteler.trainwatchers.ui.theme
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,11 +10,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -29,7 +39,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import java.text.SimpleDateFormat
+import coil.compose.AsyncImage
 
 @Preview
 @Composable
@@ -55,6 +65,7 @@ fun AddNew(modifier: Modifier = Modifier) {
             TextInput("City")
             LongTextInput("Description")
             DatePickerButton()
+            ImageUploadButton()
         }
     }
 }
@@ -76,7 +87,9 @@ fun TextInput(title : String) {
         onValueChange = { text = it },
         label = { Text(title) },
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.fillMaxWidth().height(60.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp),
         singleLine = true
     )
 }
@@ -105,7 +118,9 @@ fun DatePickerButton() {
         onClick = { showDatePicker = true },
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.outlinedButtonColors(contentColor = Brown),
-        modifier = Modifier.fillMaxWidth().height(60.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp)
     ) {
         if (selectedDate != null) {
             val date = java.sql.Date(selectedDate!!)
@@ -141,13 +156,44 @@ fun DatePicker(
             }) {
                 Text("OK")
             }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cancel")
-            }
         }
     ) {
         DatePicker(state = datePickerState)
     }
 }
+
+@Composable
+fun ImageUploadButton() {
+    var selectedImages by remember { mutableStateOf<List<Uri>>(emptyList()) }
+    val imagePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetMultipleContents(),
+        onResult = { uris -> selectedImages = uris }
+    )
+
+    OutlinedButton(
+        onClick = { imagePickerLauncher.launch("image/*") },
+        shape = RoundedCornerShape(8.dp),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Brown),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp)
+    ) {
+        Text("Upload images...")
+    }
+
+    if (selectedImages.isNotEmpty()) {
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(selectedImages) { uri ->
+                AsyncImage(
+                    model = uri,
+                    contentDescription = "Selected image",
+                    modifier = Modifier.size(128.dp)
+                )
+            }
+        }
+    }
+}
+
+
