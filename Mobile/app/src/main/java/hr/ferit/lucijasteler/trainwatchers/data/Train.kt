@@ -11,6 +11,6 @@ data class Train(
     val city : String = "",
     val description : String = "",
     val date : Date = Date(0),
-    @DrawableRes val images : List<String> = listOf(),
+    val images : List<String> = listOf(),
     val favourite : Boolean = false
 )
