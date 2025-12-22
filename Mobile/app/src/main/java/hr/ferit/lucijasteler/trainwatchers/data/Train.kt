@@ -1,7 +1,6 @@
 package hr.ferit.lucijasteler.trainwatchers.data
 
-import androidx.annotation.DrawableRes
-import java.sql.Date
+import java.util.Date
 
 data class Train(
     val id : String = "",
