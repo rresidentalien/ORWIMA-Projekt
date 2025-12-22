@@ -59,7 +59,7 @@ fun AddNew(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            AddNewHeader("Add New")
+            Title("Add New")
             TextInput("Model")
             TextInput("Operator")
             TextInput("Country")
@@ -73,14 +73,6 @@ fun AddNew(modifier: Modifier = Modifier) {
                 .align(Alignment.BottomCenter)
         )
     }
-}
-
-@Composable
-fun AddNewHeader(title : String) {
-    Text(text = title,
-        color = Color.Black,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 30.sp)
 }
 
 @Composable
