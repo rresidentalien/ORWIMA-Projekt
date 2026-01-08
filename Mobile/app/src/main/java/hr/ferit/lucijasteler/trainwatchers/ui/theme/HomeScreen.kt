@@ -63,8 +63,6 @@ fun Counter(viewModel : TrainViewModel) {
         Text(text = "You have entered ${viewModel.trains.size} trains so far.",
             modifier = Modifier.padding(top = 30.dp),
             color = Brown)
-        Text(text = "Recently entered trains:",
-            color = Brown)
     }
 }
 
@@ -103,14 +101,12 @@ fun TrainsList(viewModel : TrainViewModel) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(viewModel.trains) {train ->
-            if (train.images.isNotEmpty()) {
-                TrainCard(
-                    imageResource = train.images[0],
-                    model = train.model,
-                    city = train.city,
-                    date = train.date
-                )
-            }
+            TrainCard(
+                imageResource = train.images.firstOrNull() ?: "",
+                model = train.model,
+                city = train.city,
+                date = train.date
+            )
         }
     }
 }
