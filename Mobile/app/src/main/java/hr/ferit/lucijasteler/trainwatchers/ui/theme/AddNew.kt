@@ -27,6 +27,7 @@ import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -87,7 +88,14 @@ fun TextInput(title : String) {
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp),
-        singleLine = true
+        singleLine = true,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Brown,
+            unfocusedBorderColor = Brown,
+            focusedLabelColor = Brown,
+            unfocusedLabelColor = Brown,
+            cursorColor = Brown
+        )
     )
 }
 
@@ -102,7 +110,14 @@ fun LongTextInput(title : String) {
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .height(120.dp)
-            .fillMaxWidth()
+            .fillMaxWidth(),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Brown,
+            unfocusedBorderColor = Brown,
+            focusedLabelColor = Brown,
+            unfocusedLabelColor = Brown,
+            cursorColor = Brown
+        )
     )
 }
 
