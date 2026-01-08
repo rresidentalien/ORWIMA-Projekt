@@ -25,15 +25,7 @@ fun MyTrains(modifier: Modifier = Modifier) {
             .padding(top = 50.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        MyTrainsHeader()
+        Title("My trains")
         LazyColumn() { }
     }
-}
-
-@Composable
-fun MyTrainsHeader() {
-    Text(text = "My trains",
-        color = Color.Black,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 30.sp)
 }
