@@ -14,10 +14,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import hr.ferit.lucijasteler.trainwatchers.data.TrainViewModel
 
 @Preview
 @Composable
-fun MyTrains(modifier: Modifier = Modifier) {
+fun MyTrains(modifier: Modifier = Modifier, viewModel : TrainViewModel = viewModel()) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -26,6 +28,6 @@ fun MyTrains(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Title("My trains")
-        LazyColumn() { }
+        TrainsList(viewModel)
     }
 }
