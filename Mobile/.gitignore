@@ -1,20 +1,7 @@
 *.iml
 .gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-/. idea/codeStyles/
-/. idea/dictionaries/
-/.idea/gradle. xml
-/.idea/misc.xml
-/.idea/vcs. xml
-/.idea/jarRepositories.xml
-/.idea/compiler.xml
-/.idea/deploymentTargetDropDown.xml
+/.idea/
 .DS_Store
 /build
 */build/
@@ -22,7 +9,6 @@ out/
 /captures
 .externalNativeBuild
 .cxx
-local.properties
 /app/src/google-services.json
 firebase-debug.log
 *.jks
@@ -32,8 +18,8 @@ key.properties
 *.apk
 *.aab
 *.ap_
-*. dex
+*.dex
 *~
 *.swp
 *.bak
-*. orig
+*.orig
