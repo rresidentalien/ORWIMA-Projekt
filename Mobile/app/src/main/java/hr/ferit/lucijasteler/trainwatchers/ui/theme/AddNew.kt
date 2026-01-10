@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
@@ -38,17 +39,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import hr.ferit.lucijasteler.trainwatchers.data.Train
 import hr.ferit.lucijasteler.trainwatchers.data.TrainViewModel
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
-@Preview
 @Composable
-fun AddNew(modifier: Modifier = Modifier, trainViewModel: TrainViewModel = viewModel()) {
+fun AddNew(modifier: Modifier = Modifier, trainViewModel: TrainViewModel = viewModel(), navController: NavController? = null) {
     var model by remember { mutableStateOf("") }
     var operator by remember { mutableStateOf("") }
     var country by remember { mutableStateOf("") }
@@ -56,6 +58,7 @@ fun AddNew(modifier: Modifier = Modifier, trainViewModel: TrainViewModel = viewM
     var description by remember { mutableStateOf("") }
     var selectedDate by remember { mutableStateOf<Long?>(null) }
     var selectedImages by remember { mutableStateOf<List<Uri>>(emptyList()) }
+    var showDialog by remember { mutableStateOf(false) }
 
     Box(
         modifier = modifier
@@ -92,8 +95,39 @@ fun AddNew(modifier: Modifier = Modifier, trainViewModel: TrainViewModel = viewM
                     images = selectedImages.map { it.toString() }
                 )
                 trainViewModel.AddTrain(train)
+                model = ""
+                operator = ""
+                country = ""
+                city = ""
+                description = ""
+                selectedDate = null
+                selectedImages = emptyList()
+                showDialog = true
             }
         )
+
+        if (showDialog) {
+            AlertDialog(
+                title = {
+                    Text(text = "Train added!")
+                },
+                text = {
+                    Text(text = "You may view it in My Trains tab or the home screen.")
+                },
+                onDismissRequest = {
+                    showDialog = false
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            showDialog = false
+                        }
+                    ) {
+                        Text("Okay!")
+                    }
+                }
+            )
+        }
     }
 }
 
@@ -113,7 +147,9 @@ fun TextInput(title: String, value: String, onValueChange: (String) -> Unit) {
             unfocusedBorderColor = Brown,
             focusedLabelColor = Brown,
             unfocusedLabelColor = Brown,
-            cursorColor = Brown
+            cursorColor = Brown,
+            focusedTextColor = Brown,
+            unfocusedTextColor = Brown
         )
     )
 }
@@ -133,7 +169,9 @@ fun LongTextInput(title: String, value: String, onValueChange: (String) -> Unit)
             unfocusedBorderColor = Brown,
             focusedLabelColor = Brown,
             unfocusedLabelColor = Brown,
-            cursorColor = Brown
+            cursorColor = Brown,
+            focusedTextColor = Brown,
+            unfocusedTextColor = Brown
         )
     )
 }
@@ -141,7 +179,6 @@ fun LongTextInput(title: String, value: String, onValueChange: (String) -> Unit)
 @Composable
 fun DatePickerButton(selectedDate: Long?, onDateSelected: (Long?) -> Unit) {
     var showDatePicker by remember { mutableStateOf(false) }
-    var selectedDate by remember { mutableStateOf<Long?>(null) }
 
     OutlinedButton(
         onClick = { showDatePicker = true },
@@ -152,17 +189,16 @@ fun DatePickerButton(selectedDate: Long?, onDateSelected: (Long?) -> Unit) {
             .height(60.dp)
     ) {
         if (selectedDate != null) {
-            val date = java.sql.Date(selectedDate!!)
-            Text("Selected date: $date")
+            val date = Date(selectedDate)
+            val format = SimpleDateFormat("dd.MM.yyyy.", Locale.getDefault())
+            Text("Selected date: ${format.format(date)}")
         } else {
             Text("Select date...")
         }
     }
     if (showDatePicker) {
         DatePicker(
-            onDateSelected = {
-                selectedDate = it
-            },
+            onDateSelected = onDateSelected,
             onDismiss = { showDatePicker = false }
         )
     }
