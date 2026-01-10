@@ -38,16 +38,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import hr.ferit.lucijasteler.trainwatchers.data.Train
+import hr.ferit.lucijasteler.trainwatchers.data.TrainViewModel
+import java.util.Date
 
 @Preview
 @Composable
-fun AddNew(modifier: Modifier = Modifier) {
+fun AddNew(modifier: Modifier = Modifier, trainViewModel: TrainViewModel = viewModel()) {
+    var model by remember { mutableStateOf("") }
+    var operator by remember { mutableStateOf("") }
+    var country by remember { mutableStateOf("") }
+    var city by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
+    var selectedDate by remember { mutableStateOf<Long?>(null) }
+    var selectedImages by remember { mutableStateOf<List<Uri>>(emptyList()) }
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -61,28 +70,38 @@ fun AddNew(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Title("Add New")
-            TextInput("Model")
-            TextInput("Operator")
-            TextInput("Country")
-            TextInput("City")
-            LongTextInput("Description")
-            DatePickerButton()
-            ImageUploadButton()
+            TextInput(title = "Model", value = model, onValueChange = { model = it })
+            TextInput(title = "Operator", value = operator, onValueChange = { operator = it })
+            TextInput(title = "Country", value = country, onValueChange = { country = it })
+            TextInput(title = "City", value = city, onValueChange = { city = it })
+            LongTextInput(title = "Description", value = description, onValueChange = { description = it })
+            DatePickerButton(selectedDate = selectedDate, onDateSelected = { selectedDate = it })
+            ImageUploadButton(selectedImages = selectedImages, onImagesSelected = { selectedImages = it })
         }
         SubmitButton(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
+                .align(Alignment.BottomCenter),
+            onClick = {
+                val train = Train(
+                    model = model,
+                    operator = operator,
+                    country = country,
+                    city = city,
+                    description = description,
+                    date = Date(selectedDate ?: 0),
+                    images = selectedImages.map { it.toString() }
+                )
+                trainViewModel.AddTrain(train)
+            }
         )
     }
 }
 
 @Composable
-fun TextInput(title : String) {
-    var text by remember { mutableStateOf("") }
-
+fun TextInput(title: String, value: String, onValueChange: (String) -> Unit) {
     OutlinedTextField(
-        value = text,
-        onValueChange = { text = it },
+        value = value,
+        onValueChange = onValueChange,
         label = { Text(title) },
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
@@ -100,12 +119,10 @@ fun TextInput(title : String) {
 }
 
 @Composable
-fun LongTextInput(title : String) {
-    var text by remember { mutableStateOf("") }
-
+fun LongTextInput(title: String, value: String, onValueChange: (String) -> Unit) {
     OutlinedTextField(
-        value = text,
-        onValueChange = { text = it },
+        value = value,
+        onValueChange = onValueChange,
         label = { Text(title) },
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
@@ -122,7 +139,7 @@ fun LongTextInput(title : String) {
 }
 
 @Composable
-fun DatePickerButton() {
+fun DatePickerButton(selectedDate: Long?, onDateSelected: (Long?) -> Unit) {
     var showDatePicker by remember { mutableStateOf(false) }
     var selectedDate by remember { mutableStateOf<Long?>(null) }
 
@@ -175,11 +192,10 @@ fun DatePicker(
 }
 
 @Composable
-fun ImageUploadButton() {
-    var selectedImages by remember { mutableStateOf<List<Uri>>(emptyList()) }
+fun ImageUploadButton(selectedImages: List<Uri>, onImagesSelected: (List<Uri>) -> Unit) {
     val imagePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetMultipleContents(),
-        onResult = { uris -> selectedImages = uris }
+        onResult = { uris -> onImagesSelected(uris) }
     )
 
     OutlinedButton(
@@ -209,9 +225,9 @@ fun ImageUploadButton() {
 }
 
 @Composable
-fun SubmitButton(modifier : Modifier = Modifier) {
+fun SubmitButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
     ExtendedFloatingActionButton(
-        onClick = { TODO() },
+        onClick = onClick,
         icon = { Icon(Icons.Outlined.Add, contentDescription = "Add") },
         text = { Text("Submit") },
         containerColor = Brown,
