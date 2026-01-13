@@ -84,10 +84,9 @@ fun AddNew(trainViewModel: TrainViewModel = viewModel()) {
                     country = country,
                     city = city,
                     description = description,
-                    date = Date(selectedDate ?: 0),
-                    images = selectedImages.map { it.toString() }
+                    date = Date(selectedDate ?: 0)
                 )
-                trainViewModel.AddTrain(train)
+                trainViewModel.addTrain(train, selectedImages)
                 model = ""
                 operator = ""
                 country = ""
@@ -223,13 +222,13 @@ fun DatePicker(
 
 @Composable
 fun ImageUploadButton(selectedImages: List<Uri>, onImagesSelected: (List<Uri>) -> Unit) {
-    val imagePickerLauncher = rememberLauncherForActivityResult(
+    val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetMultipleContents(),
-        onResult = { uris -> onImagesSelected(uris) }
+        onResult = { uris: List<Uri> -> uris.let { onImagesSelected(it) } }
     )
 
     OutlinedButton(
-        onClick = { imagePickerLauncher.launch("image/*") },
+        onClick = { launcher.launch("image/*") },
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.outlinedButtonColors(contentColor = Brown),
         border = BorderStroke(1.dp, Brown),
