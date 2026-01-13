@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -69,23 +71,23 @@ fun Counter(viewModel : TrainViewModel) {
 
 @Composable
 fun TrainCard(imageResource: String, model: String, city: String, date: Date, onClick: () -> Unit) {
-    Column(
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = Brown, shape = RoundedCornerShape(8.dp))
-            .clickable(onClick = onClick)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(containerColor = Brown),
+        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
     ){
         val formattedDate = SimpleDateFormat("dd.MM.yyyy.", Locale.getDefault()).format(date)
-        Text(text = model, color = AntiqueWhite, fontWeight = FontWeight.Bold, fontSize = 20.sp)
-        Text(text = "$city, $formattedDate", color = AntiqueWhite)
+        Text(modifier = Modifier.padding(top = 20.dp, start = 20.dp, bottom = 10.dp), text = model, color = AntiqueWhite, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+        Text(modifier = Modifier.padding(start = 20.dp, bottom = 20.dp), text = "$city, $formattedDate", color = AntiqueWhite)
         if (imageResource.isNotEmpty()) {
             AsyncImage(
                 model = imageResource,
                 contentDescription = model,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
                     .height(200.dp)
                     .clip(RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop,
@@ -99,8 +101,8 @@ fun TrainsList(navController: NavHostController, viewModel : TrainViewModel) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(15.dp),
+        verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         items(viewModel.trains) {train ->
             TrainCard(
