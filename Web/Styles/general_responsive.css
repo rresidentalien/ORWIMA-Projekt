@@ -113,7 +113,7 @@ footer p {
     }
 }
 
-@media (max-width: 705px) {
+@media (max-width: 790px) {
     #header {
         flex-direction: column;
     }
@@ -149,5 +149,10 @@ footer p {
     /*Homepage - hide icon*/
     #icon {
         display: none;
+    }
+
+    #header-logo img {
+        width: 270px;
+        padding-top: 20px;
     }
 }
