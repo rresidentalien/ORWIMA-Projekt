@@ -27,23 +27,6 @@ fun MyTrains(navController: NavHostController, viewModel: TrainViewModel, modifi
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Title("My trains")
-        FavouriteButton()
         TrainsList(navController = navController, viewModel = viewModel)
-    }
-}
-
-@Composable
-fun FavouriteButton() {
-    OutlinedButton(
-        onClick = { /*TODO*/ },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(40.dp)
-            .padding(start = 16.dp, end = 16.dp),
-        shape = RoundedCornerShape(8.dp),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = Brown),
-
-    ) {
-        Text("View favourite trains")
     }
 }

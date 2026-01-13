@@ -10,6 +10,5 @@ data class Train(
     val city : String = "",
     val description : String = "",
     val date : Date = Date(0),
-    val images : List<String> = listOf(),
-    val favourite : Boolean = false
+    val images : List<String> = listOf()
 )
