@@ -32,6 +32,7 @@ fun TrainDetails(train: Train) {
             .fillMaxSize()
             .background(color = AntiqueWhite)
             .verticalScroll(rememberScrollState())
+            .padding(bottom = 90.dp)
     ) {
         ImageHeader(train)
         Spacer(modifier = Modifier.height(15.dp))

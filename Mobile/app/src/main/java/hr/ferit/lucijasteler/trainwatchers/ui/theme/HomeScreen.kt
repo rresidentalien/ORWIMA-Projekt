@@ -36,7 +36,7 @@ fun HomeScreen(navController: NavHostController, viewModel: TrainViewModel, modi
         modifier = modifier
             .fillMaxSize()
             .background(color = AntiqueWhite)
-            .padding(top = 50.dp),
+            .padding(top = 50.dp, bottom = 90.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Title("Trainwatchers")
