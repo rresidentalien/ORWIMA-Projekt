@@ -97,7 +97,7 @@ fun TrainsList(viewModel : TrainViewModel) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp),
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(viewModel.trains) {train ->
