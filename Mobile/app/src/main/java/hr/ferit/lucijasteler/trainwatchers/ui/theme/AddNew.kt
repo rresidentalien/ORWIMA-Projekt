@@ -60,30 +60,24 @@ fun AddNew(modifier: Modifier = Modifier, trainViewModel: TrainViewModel = viewM
     var selectedImages by remember { mutableStateOf<List<Uri>>(emptyList()) }
     var showDialog by remember { mutableStateOf(false) }
 
-    Box(
-        modifier = modifier
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .background(color = AntiqueWhite)
-            .padding(top = 50.dp, start = 16.dp, end = 16.dp, bottom = 120.dp)
+            .padding(top = 50.dp, start = 16.dp, end = 16.dp, bottom = 120.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Title("Add New")
-            TextInput(title = "Model", value = model, onValueChange = { model = it })
-            TextInput(title = "Operator", value = operator, onValueChange = { operator = it })
-            TextInput(title = "Country", value = country, onValueChange = { country = it })
-            TextInput(title = "City", value = city, onValueChange = { city = it })
-            LongTextInput(title = "Description", value = description, onValueChange = { description = it })
-            DatePickerButton(selectedDate = selectedDate, onDateSelected = { selectedDate = it })
-            ImageUploadButton(selectedImages = selectedImages, onImagesSelected = { selectedImages = it })
-        }
+        Title("Add New")
+        TextInput(title = "Model", value = model, onValueChange = { model = it })
+        TextInput(title = "Operator", value = operator, onValueChange = { operator = it })
+        TextInput(title = "Country", value = country, onValueChange = { country = it })
+        TextInput(title = "City", value = city, onValueChange = { city = it })
+        LongTextInput(title = "Description", value = description, onValueChange = { description = it })
+        DatePickerButton(selectedDate = selectedDate, onDateSelected = { selectedDate = it })
+        ImageUploadButton(selectedImages = selectedImages, onImagesSelected = { selectedImages = it })
         SubmitButton(
-            modifier = Modifier
-                .align(Alignment.BottomCenter),
             onClick = {
                 val train = Train(
                     model = model,
