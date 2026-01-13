@@ -24,10 +24,15 @@ fun MyTrains(modifier: Modifier = Modifier, viewModel : TrainViewModel = viewMod
         modifier = modifier
             .fillMaxSize()
             .background(color = AntiqueWhite)
-            .padding(top = 50.dp),
+            .padding(top = 50.dp, bottom = 100.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Title("My trains")
         TrainsList(viewModel)
     }
+}
+
+@Composable
+fun FavouriteButton(modifier: Modifier = Modifier) {
+
 }
