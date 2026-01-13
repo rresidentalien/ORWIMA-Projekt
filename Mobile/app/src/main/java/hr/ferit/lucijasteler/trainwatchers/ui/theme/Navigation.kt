@@ -51,8 +51,7 @@ enum class Destination(
 fun AppNavHost(navController: NavHostController, startDestination: Destination, viewModel: TrainViewModel, modifier: Modifier = Modifier) {
     NavHost(
         navController,
-        startDestination = startDestination.route,
-        modifier = modifier
+        startDestination = startDestination.route
     ) {
         composable(Destination.HOME_SCREEN.route) { HomeScreen(navController, viewModel) }
         composable(Destination.ADD_NEW_SCREEN.route) { AddNew(viewModel) }
