@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -30,18 +31,20 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import hr.ferit.lucijasteler.trainwatchers.R
 import hr.ferit.lucijasteler.trainwatchers.data.TrainViewModel
 
 enum class Destination(
     val route : String,
-    val icon : ImageVector,
-    val contentDescription : String
+    val contentDescription : String,
+    val icon: ImageVector? = null,
+    val drawable: Int? = null
 ) {
-    HOME_SCREEN("home", Icons.Outlined.Home, "Home"),
-    ADD_NEW_SCREEN("add_new", Icons.Outlined.Add, "Add New"),
-    MY_TRAINS_SCREEN("my_trains", Icons.Outlined.Star, "My Trains"),
-    ABOUT_APP_SCREEN("about_app", Icons.Outlined.Info, "About App"),
-    TRAIN_DETAILS_SCREEN("train_details/{trainId}", Icons.Outlined.Info, "Train Details")
+    HOME_SCREEN("home", "Home", icon = Icons.Outlined.Home),
+    ADD_NEW_SCREEN("add_new", "Add New", icon = Icons.Outlined.Add),
+    MY_TRAINS_SCREEN("my_trains", "My Trains", drawable = R.drawable.train),
+    ABOUT_APP_SCREEN("about_app", "About App", icon = Icons.Outlined.Info),
+    TRAIN_DETAILS_SCREEN("train_details/{trainId}", "Train Details", icon = Icons.Outlined.Info)
 }
 
 @Composable
@@ -93,10 +96,17 @@ fun AppNavigation(viewModel: TrainViewModel) {
                             selectedTextColor = Brown
                         ),
                         icon = {
-                            Icon(
-                                destination.icon,
-                                contentDescription = destination.contentDescription
-                            )
+                            if (destination.icon != null) {
+                                Icon(
+                                    imageVector = destination.icon,
+                                    contentDescription = destination.contentDescription
+                                )
+                            } else if (destination.drawable != null) {
+                                Icon(
+                                    painter = painterResource(id = destination.drawable),
+                                    contentDescription = destination.contentDescription
+                                )
+                            }
                         },
                         label = { Text(destination.contentDescription) }
                     )
