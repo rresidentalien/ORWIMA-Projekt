@@ -1,6 +1,7 @@
 package hr.ferit.lucijasteler.trainwatchers.ui.theme
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import hr.ferit.lucijasteler.trainwatchers.data.TrainViewModel
 import java.text.SimpleDateFormat
@@ -28,17 +29,17 @@ import java.util.Date
 import java.util.Locale
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, viewModel : TrainViewModel = viewModel()) {
+fun HomeScreen(navController: NavHostController, viewModel: TrainViewModel, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(color = AntiqueWhite)
-            .padding(top = 50.dp, bottom = 100.dp),
+            .padding(top = 50.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Title("Trainwatchers")
         Counter(viewModel)
-        TrainsList(viewModel)
+        TrainsList(navController = navController, viewModel = viewModel)
     }
 }
 
@@ -67,11 +68,12 @@ fun Counter(viewModel : TrainViewModel) {
 }
 
 @Composable
-fun TrainCard(imageResource : String, model : String, city : String, date : Date) {
+fun TrainCard(imageResource: String, model: String, city: String, date: Date, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Brown, shape = RoundedCornerShape(8.dp))
+            .clickable(onClick = onClick)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ){
@@ -93,7 +95,7 @@ fun TrainCard(imageResource : String, model : String, city : String, date : Date
 }
 
 @Composable
-fun TrainsList(viewModel : TrainViewModel) {
+fun TrainsList(navController: NavHostController, viewModel : TrainViewModel) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -105,7 +107,10 @@ fun TrainsList(viewModel : TrainViewModel) {
                 imageResource = train.images.firstOrNull() ?: "",
                 model = train.model,
                 city = train.city,
-                date = train.date
+                date = train.date,
+                onClick = {
+                    navController.navigate(Destination.TRAIN_DETAILS_SCREEN.route.replace("{trainId}", train.id))
+                }
             )
         }
     }

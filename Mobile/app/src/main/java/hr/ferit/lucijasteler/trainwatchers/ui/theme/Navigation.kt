@@ -17,58 +17,60 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import hr.ferit.lucijasteler.trainwatchers.data.TrainViewModel
 
 enum class Destination(
-    val route: String,
-    val icon: ImageVector,
+    val route : String,
+    val icon : ImageVector,
     val contentDescription : String
 ) {
     HOME_SCREEN("home", Icons.Outlined.Home, "Home"),
     ADD_NEW_SCREEN("add_new", Icons.Outlined.Add, "Add New"),
     MY_TRAINS_SCREEN("my_trains", Icons.Outlined.Star, "My Trains"),
-    ABOUT_APP_SCREEN("about_app", Icons.Outlined.Info, "About App")
+    ABOUT_APP_SCREEN("about_app", Icons.Outlined.Info, "About App"),
+    TRAIN_DETAILS_SCREEN("train_details/{trainId}", Icons.Outlined.Info, "Train Details")
 }
 
 @Composable
-fun AppNavHost(
-    navController: NavHostController,
-    startDestination: Destination,
-    modifier: Modifier = Modifier
-) {
+fun AppNavHost(navController: NavHostController, startDestination: Destination, viewModel: TrainViewModel, modifier: Modifier = Modifier) {
     NavHost(
         navController,
-        startDestination = startDestination.route
+        startDestination = startDestination.route,
+        modifier = modifier
     ) {
-        Destination.entries.forEach { destination ->
-            composable(destination.route) {
-                when (destination) {
-                    Destination.HOME_SCREEN -> HomeScreen()
-                    Destination.ADD_NEW_SCREEN -> AddNew()
-                    Destination.MY_TRAINS_SCREEN -> MyTrains()
-                    Destination.ABOUT_APP_SCREEN -> AboutApp()
-                }
-            }
+        composable(Destination.HOME_SCREEN.route) { HomeScreen(navController, viewModel) }
+        composable(Destination.ADD_NEW_SCREEN.route) { AddNew(viewModel) }
+        composable(Destination.MY_TRAINS_SCREEN.route) { MyTrains(navController, viewModel) }
+        composable(Destination.ABOUT_APP_SCREEN.route) { AboutApp() }
+        composable(
+            route = Destination.TRAIN_DETAILS_SCREEN.route,
+            arguments = listOf(navArgument("trainId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val trainId = backStackEntry.arguments?.getString("trainId")
+            TrainDetails(viewModel.trains.find { it.id == trainId }!!)
         }
     }
 }
 
 @Composable
-fun AppNavigation(viewModel : TrainViewModel) {
+fun AppNavigation(viewModel: TrainViewModel) {
     val navController = rememberNavController()
     val startDestination = Destination.HOME_SCREEN
     var selectedDestination by rememberSaveable { mutableIntStateOf(startDestination.ordinal) }
+    val destinations = listOf(Destination.HOME_SCREEN, Destination.ADD_NEW_SCREEN, Destination.MY_TRAINS_SCREEN, Destination.ABOUT_APP_SCREEN)
 
     Scaffold(
         bottomBar = {
@@ -76,7 +78,7 @@ fun AppNavigation(viewModel : TrainViewModel) {
                 containerColor = DarkAntiqueWhite,
                 modifier = Modifier.clip(RoundedCornerShape(topStart = 25.dp, topEnd = 25.dp))
             ) {
-                Destination.entries.forEachIndexed { index, destination ->
+                destinations.forEachIndexed { index, destination ->
                     NavigationBarItem(
                         selected = selectedDestination == index,
                         onClick = {
@@ -102,6 +104,6 @@ fun AppNavigation(viewModel : TrainViewModel) {
             }
         }
     ) { contentPadding ->
-        AppNavHost(navController, startDestination, modifier = Modifier.padding(contentPadding))
+        AppNavHost(navController, startDestination, viewModel, modifier = Modifier.padding(contentPadding))
     }
 }
