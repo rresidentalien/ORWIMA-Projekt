@@ -5,7 +5,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -41,7 +40,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import hr.ferit.lucijasteler.trainwatchers.data.Train
 import hr.ferit.lucijasteler.trainwatchers.data.TrainViewModel
@@ -50,7 +48,7 @@ import java.util.Date
 import java.util.Locale
 
 @Composable
-fun AddNew(modifier: Modifier = Modifier, trainViewModel: TrainViewModel = viewModel(), navController: NavController? = null) {
+fun AddNew(trainViewModel: TrainViewModel = viewModel()) {
     var model by remember { mutableStateOf("") }
     var operator by remember { mutableStateOf("") }
     var country by remember { mutableStateOf("") }
@@ -255,13 +253,12 @@ fun ImageUploadButton(selectedImages: List<Uri>, onImagesSelected: (List<Uri>) -
 }
 
 @Composable
-fun SubmitButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun SubmitButton(onClick: () -> Unit) {
     ExtendedFloatingActionButton(
         onClick = onClick,
         icon = { Icon(Icons.Outlined.Add, contentDescription = "Add") },
         text = { Text("Submit") },
         containerColor = Brown,
         contentColor = AntiqueWhite,
-        modifier = modifier
     )
 }
