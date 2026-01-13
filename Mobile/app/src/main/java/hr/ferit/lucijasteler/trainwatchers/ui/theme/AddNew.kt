@@ -3,6 +3,7 @@ package hr.ferit.lucijasteler.trainwatchers.ui.theme
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -63,9 +64,9 @@ fun AddNew(trainViewModel: TrainViewModel = viewModel()) {
             .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .background(color = AntiqueWhite)
-            .padding(top = 50.dp, start = 16.dp, end = 16.dp, bottom = 120.dp),
+            .padding(top = 50.dp, start = 15.dp, end = 15.dp, bottom = 120.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         Title("Add New")
         TextInput(title = "Model", value = model, onValueChange = { model = it })
@@ -176,6 +177,7 @@ fun DatePickerButton(selectedDate: Long?, onDateSelected: (Long?) -> Unit) {
         onClick = { showDatePicker = true },
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.outlinedButtonColors(contentColor = Brown),
+        border = BorderStroke(1.dp, Brown),
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)
@@ -230,6 +232,7 @@ fun ImageUploadButton(selectedImages: List<Uri>, onImagesSelected: (List<Uri>) -
         onClick = { imagePickerLauncher.launch("image/*") },
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.outlinedButtonColors(contentColor = Brown),
+        border = BorderStroke(1.dp, Brown),
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)
