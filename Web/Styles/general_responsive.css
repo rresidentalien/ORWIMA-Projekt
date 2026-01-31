@@ -71,6 +71,10 @@ footer p {
     margin: 0;
 }
 
+#footer_link {
+    color: rgb(73, 43, 20);
+}
+
 @media (min-width: 1441px) {
     main {
         max-width: 1200px;
