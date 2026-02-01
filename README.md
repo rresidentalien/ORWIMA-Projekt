@@ -10,4 +10,5 @@ This project can be accessed as a [website on GitHub Pages](https://rresidentali
 
 A feature showcase of the Android application can be seen below:
 
-https://github.com/rresidentalien/ORWIMA-Projekt/blob/main/Mobile/app-showcase.mp4
+https://github.com/user-attachments/assets/b9efea87-3d8f-4c2d-bb0d-2e5bc6a2a2cc
+
