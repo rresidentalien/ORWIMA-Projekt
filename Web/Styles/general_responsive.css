@@ -3,6 +3,10 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+main {
+    margin: 30px auto;
+}
+
 h1,
 h2,
 h3 {
@@ -14,16 +18,20 @@ h3 {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background: #c2c2c2;
     background: linear-gradient(275deg, rgba(194, 194, 194, 1) 0%, rgba(209, 207, 207, 1) 100%);
     border-radius: 10px;
     padding: 0px 20px;
+    margin: 20px auto;
 }
 
 #navigation_list ul {
     display: flex;
     flex-direction: row;
     list-style-type: none;
+}
+
+#navigation_list ul li {
+    margin-left: 20px;
 }
 
 #navigation_list button {
@@ -43,13 +51,7 @@ h3 {
     color: rgb(222, 193, 145);
 }
 
-header a {
-    text-decoration: none;
-    color: black;
-}
-
 main {
-    background: #c2c2c2;
     background: linear-gradient(275deg, rgba(194, 194, 194, 1) 0%, rgba(209, 207, 207, 1) 100%);
     border: 0px;
     border-radius: 10px;
@@ -75,49 +77,7 @@ footer p {
     color: rgb(73, 43, 20);
 }
 
-@media (min-width: 1441px) {
-    main {
-        max-width: 1200px;
-        margin: 30px auto;
-    }
-
-    #header {
-        margin: 20px auto;
-        max-width: 1200px;
-    }
-
-    #navigation_list ul li {
-        margin-left: 20px;
-    }
-}
-
-@media (max-width: 1440px) {
-    main {
-        max-width: 1000px;
-        margin: 30px auto;
-    }
-
-    #header {
-        margin: 20px auto;
-        max-width: 1000px;
-    }
-
-    #navigation_list ul li {
-        margin-left: 20px;
-    }
-}
-
-@media (max-width: 1024px) {
-    body {
-        padding: 20px;
-    }
-
-    main {
-        margin: 20px 0;
-    }
-}
-
-@media (max-width: 790px) {
+@media (max-width: 830px) {
     #header {
         flex-direction: column;
     }
@@ -126,7 +86,6 @@ footer p {
         flex-direction: column;
         gap: 10px;
         padding-left: 0px;
-        margin-left: 0px;
     }
 
     #navigation_list ul li {
@@ -145,18 +104,45 @@ footer p {
         flex-direction: column;
     }
 
-    /*Pages -> Trips -> all of the trip pages -> photos grid*/
+    /*Pages -> Trips -> podstranice -> photos grid*/
     #photos {
         grid-template-columns: 1fr;
     }
 
-    /*Homepage - hide icon*/
+    /*Homepage - sakrij ikonicu*/
     #icon {
         display: none;
     }
 
+    /*Promjena velicine loga*/
     #header-logo img {
         width: 270px;
         padding-top: 20px;
+    }
+}
+
+@media (min-width: 831px) and (max-width: 1024px) {
+    body {
+        padding: 20px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    main {
+        max-width: 1000px;
+    }
+
+    #header {
+        max-width: 1000px;
+    }
+}
+
+@media (min-width: 1441px) {
+    main {
+        max-width: 1200px;
+    }
+
+    #header {
+        max-width: 1200px;
     }
 }

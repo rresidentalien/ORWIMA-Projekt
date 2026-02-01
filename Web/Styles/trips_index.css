@@ -3,14 +3,14 @@
     padding-left: 0px;
 }
 
-#trips ul>li {
+#trips li {
     list-style-type: none;
     background-color: rgb(73, 43, 20);
     margin: 10px;
     border-radius: 7px;
 }
 
-#trips ul>li a {
+#trips li a {
     color: antiquewhite;
     text-decoration: none;
     display: block;
