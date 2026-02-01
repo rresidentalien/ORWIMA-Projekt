@@ -5,3 +5,9 @@ Trainwatchers is an info site / personal blog about trains. Here you can find so
 ## Website
 
 This project can be accessed as a [website on GitHub Pages](https://rresidentalien.github.io/ORWIMA-Projekt/Web/Pages/homepage.html).
+
+# App
+
+A feature showcase of the Android application can be seen below:
+
+https://github.com/rresidentalien/ORWIMA-Projekt/blob/main/Mobile/app-showcase.mp4
