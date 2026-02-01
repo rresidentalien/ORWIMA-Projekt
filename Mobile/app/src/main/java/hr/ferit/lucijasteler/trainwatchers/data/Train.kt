@@ -9,6 +9,6 @@ data class Train(
     val country : String = "",
     val city : String = "",
     val description : String = "",
-    val date : Date = Date(0),
+    val date : Date = Date(),
     val images : List<String> = listOf()
 )

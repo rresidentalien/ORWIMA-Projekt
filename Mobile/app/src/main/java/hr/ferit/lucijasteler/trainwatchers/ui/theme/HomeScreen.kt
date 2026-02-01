@@ -79,8 +79,14 @@ fun TrainCard(imageResource: String, model: String, city: String, date: Date, on
         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
     ){
         val formattedDate = SimpleDateFormat("dd.MM.yyyy.", Locale.getDefault()).format(date)
-        Text(modifier = Modifier.padding(top = 20.dp, start = 20.dp, bottom = 10.dp), text = model, color = AntiqueWhite, fontWeight = FontWeight.Bold, fontSize = 20.sp)
-        Text(modifier = Modifier.padding(start = 20.dp, bottom = 20.dp), text = "$city, $formattedDate", color = AntiqueWhite)
+        Text(modifier = Modifier.padding(top = 20.dp, start = 20.dp, bottom = 10.dp),
+                text = model,
+                color = AntiqueWhite,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp)
+        Text(modifier = Modifier.padding(start = 20.dp, bottom = 20.dp),
+                text = "$city, $formattedDate",
+                color = AntiqueWhite)
         if (imageResource.isNotEmpty()) {
             AsyncImage(
                 model = imageResource,
@@ -106,7 +112,7 @@ fun TrainsList(navController: NavHostController, viewModel : TrainViewModel) {
     ) {
         items(viewModel.trains) {train ->
             TrainCard(
-                imageResource = train.images.firstOrNull() ?: "",
+                imageResource = train.images.firstOrNull().toString(),
                 model = train.model,
                 city = train.city,
                 date = train.date,

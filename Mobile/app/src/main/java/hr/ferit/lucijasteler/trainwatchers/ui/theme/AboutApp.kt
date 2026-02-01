@@ -18,9 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun AboutApp(modifier: Modifier = Modifier) {
+fun AboutApp() {
     Column(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
             .background(color = AntiqueWhite)
             .padding(top = 50.dp),
@@ -33,7 +33,7 @@ fun AboutApp(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun AboutText(modifier: Modifier = Modifier) {
+fun AboutText() {
     Text(text = "Trainwatchers was created as part of my Basics of Web and Mobile Application Development class at FERIT, " +
             "Osijek. It has an accompanying website about my train journeys and some train travel tips, as well as some travel ideas. " +
             "I chose my project to be about trains because I think it's the best form of public transport, and I enjoy seeing different trains when I travel.",
@@ -46,7 +46,7 @@ fun AboutText(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun WebsiteLinkButton(modifier: Modifier = Modifier) {
+fun WebsiteLinkButton() {
     val uriHandler = LocalUriHandler.current
     OutlinedButton(
         onClick = { uriHandler.openUri("https://rresidentalien.github.io/ORWIMA-Projekt/Web/Pages/homepage.html") },

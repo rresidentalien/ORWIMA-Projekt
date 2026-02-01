@@ -21,21 +21,19 @@ class TrainViewModel : ViewModel() {
     private fun fetchTrains() {
         db.collection("trains")
             .get()
-            .addOnSuccessListener { result ->
+            .addOnSuccessListener { entries ->
                 trains.clear()
-                for (document in result) {
-                    val train = document.toObject(Train::class.java).copy(id = document.id)
+                for (item in entries) {
+                    val train = item.toObject(Train::class.java).copy(id = item.id)
                     trains.add(train)
                 }
             }
     }
 
     fun addTrain(train: Train, imageUris: List<Uri>) {
-        val storageRef = storage.reference
         val uploadedImageUrls = mutableListOf<String>()
-        val totalImages = imageUris.size
 
-        if (totalImages == 0) {
+        if (imageUris.isEmpty()) {
             db.collection("trains")
                 .add(train.copy(images = emptyList()))
                 .addOnSuccessListener {
@@ -46,15 +44,14 @@ class TrainViewModel : ViewModel() {
 
         imageUris.forEach { uri ->
             val fileName = UUID.randomUUID().toString()
-            val imageRef = storageRef.child("images/$fileName")
+            val imageRef = storage.reference.child("images/$fileName")
             imageRef.putFile(uri)
                 .addOnSuccessListener {
-                    imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                        uploadedImageUrls.add(downloadUri.toString())
-                        if (uploadedImageUrls.size == totalImages) {
-                            val trainWithImages = train.copy(images = uploadedImageUrls)
+                    imageRef.downloadUrl.addOnSuccessListener { downloadedUrl ->
+                        uploadedImageUrls.add(downloadedUrl.toString())
+                        if (uploadedImageUrls.size == imageUris.size) {
                             db.collection("trains")
-                                .add(trainWithImages)
+                                .add(train.copy(images = uploadedImageUrls))
                                 .addOnSuccessListener {
                                     fetchTrains()
                                 }

@@ -224,7 +224,7 @@ fun DatePicker(
 fun ImageUploadButton(selectedImages: List<Uri>, onImagesSelected: (List<Uri>) -> Unit) {
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetMultipleContents(),
-        onResult = { uris: List<Uri> -> uris.let { onImagesSelected(it) } }
+        onResult = { uris: List<Uri> -> onImagesSelected(uris) }
     )
 
     OutlinedButton(
