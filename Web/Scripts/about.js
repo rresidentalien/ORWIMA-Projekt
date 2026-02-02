@@ -19,7 +19,7 @@ function Submit() {
         nameError.style.display = 'none';
     }
 
-    if (!email || !email.value || !email.value.includes('@')) {
+    if (!email || !email.value || !email.value.includes('@') || !email.value.includes('.')) {
         emailError.textContent = 'Please enter a valid email address!';
         valid = false;
     } else {
